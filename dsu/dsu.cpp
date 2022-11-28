@@ -1,9 +1,9 @@
 struct DSU {
-  vector<int> sz, par;
+  vector<int> siz, par;
 
   void init(int n) {
-    sz.resize(n, 1);
-    par.resize(n, -1);
+    siz.resize(n, 1);
+    par.resize(n, -1);`
   }
 
   int get_root(int u) {
@@ -19,10 +19,10 @@ struct DSU {
     if (a == b) {
       return;
     }
-    if (sz[a] < sz[b]) {
+    if (siz[a] < siz[b]) {
       swap(a, b);
     }
     par[b] = a;
-    sz[a] += sz[b];
+    siz[a] += siz[b];
   }
 }
