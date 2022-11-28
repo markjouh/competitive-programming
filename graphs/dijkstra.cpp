@@ -1,14 +1,4 @@
-void dijkstra() {
-    int n, m;
-    cin >> n >> m;
-    vector<vector<pii>> g(n);
-    for (int i = 0; i < m; i++) {
-        int u, v, w;
-        cin >> u >> v >> w;
-        u--; v--;
-        g[u].push_back({v, w});
-        g[v].push_back({u, w});
-    }
+int dijkstra(vector<vector<pii>> g) {
     // O(E * log(V))
     priority_queue<pii, vector<pii>, greater<pii>> pq;
     vector<int> cost(n, 1e9);
@@ -24,5 +14,5 @@ void dijkstra() {
             }
         }
     }
-    cout << cost[n - 1] << '\n';
+    return cost[n - 1];
 }
