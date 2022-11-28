@@ -1,11 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef long long ll;
-
-#define all(x) (x).begin(), (x).end()
-#define sz(x) (int)(x).size()
-
 struct segtree {
     int siz;
     vector<ll> tree, lazy;
@@ -66,7 +58,7 @@ struct segtree {
         update(L, R, 0, 0, siz, v);
     }
 
-    int query(int L, int R, int x, int l, int r) {
+    ll query(int L, int R, int x, int l, int r) {
         if (lazy[x] != 0) {
             tree[x] += (r - l) * lazy[x];
             if (l != r - 1) {
@@ -85,12 +77,7 @@ struct segtree {
         return query(L, R, 2 * x + 1, l, mid) + query(L, R, 2 * x + 2, mid, r);
     }
 
-    int query(int L, int R) {
+    ll query(int L, int R) {
         return query(L, R, 0, 0, siz);
     }
 };
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-}
