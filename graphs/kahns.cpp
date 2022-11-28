@@ -1,15 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-#define sz(x) ((int)(x).size())
-#define all(x) (x).begin(), (x).end()
-#define rall(x) (x).rbegin(), (x).rend()
-typedef long long ll;
-typedef pair<int, int> pii;
-typedef pair<ll, ll> pll;
-#define fi first
-#define se second
-
 vector<int> topsort(vector<vector<int>> g) {
     // O(V + E), res.size() < n if the graph isn't a DAG
     int n = sz(g);
@@ -38,9 +26,4 @@ vector<int> topsort(vector<vector<int>> g) {
         }
     }
     return res;
-}
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
 }
