@@ -1,14 +1,4 @@
-void prims {
-    int n, m;
-    cin >> n >> m;
-    vector<vector<pii>> g(n);
-    for (int i = 0; i < m; i++) {
-        int u, v, w;
-        cin >> u >> v >> w;
-        u--; v--;
-        g[u].push_back({w, v});
-        g[v].push_back({w, u});
-    }
+int prims(vector<vector<pii>> g) {
     // O((V + E) * log(V))
     int ans = 0;
     vector<int> cost(n, 1e9);
@@ -31,5 +21,5 @@ void prims {
             }
         }
     }
-    cout << ans << '\n';
+    return ans;
 }
