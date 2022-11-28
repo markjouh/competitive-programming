@@ -1,3 +1,5 @@
+// needs sieve
+
 vector<pll> factorize(ll n) {
     vector<pll> res;
     // O(log(n)) if we've run sieve up to n.
