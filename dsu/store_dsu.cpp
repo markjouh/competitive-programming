@@ -1,9 +1,9 @@
 struct S_DSU {
-    vector<int> sz, par;
+    vector<int> siz, par;
     vector<vector<int>> cont;
 
     void init(int n) {
-        sz.resize(n, 1);
+        siz.resize(n, 1);
         par.resize(n, -1);
         cont.resize(n);
         for (int i = 0; i < n; i++) {
@@ -25,11 +25,11 @@ struct S_DSU {
         if (a == b) {
             return;
         }
-        if (sz[a] < sz[b]) {
+        if (siz[a] < siz[b]) {
             swap(a, b);
         }
         par[b] = a;
-        sz[a] += sz[b];
+        siz[a] += siz[b];
         for (int x : cont[b]) {
             cont[a].push_back(x);
             par[x] = a;
