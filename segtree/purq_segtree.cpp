@@ -16,22 +16,22 @@ struct Tree {
         tree.resize(2 * siz);
     }
 
-    void upd(int i, int v, int x, int l, int r) {
+    void update(int i, int v, int x, int l, int r) {
         if (l + 1 == r) {
             tree[x] = v;
             return;
         }
         int mid = l + (r - l) / 2;
         if (i < mid) {
-            upd(i, v, 2 * x + 1, l, mid);
+            update(i, v, 2 * x + 1, l, mid);
         } else {
-            upd(i, v, 2 * x + 2, mid, r);
+            update(i, v, 2 * x + 2, mid, r);
         }
         tree[x] = f(tree[2 * x + 1], tree[2 * x + 2]);
     }
 
-    void upd(int i, int v) {
-        upd(i, v, 0, 0, siz);
+    void update(int i, int v) {
+        update(i, v, 0, 0, siz);
     }
 
     void build(vector<T> &a, int x, int l, int r) {
