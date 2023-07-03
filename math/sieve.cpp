@@ -12,8 +12,10 @@ void sieve(long long n) {
             primes.push_back(i);
             mnfactor[i] = i;
             for (long long j = i * i; j <= n; j += i) {
-                isprime[j] = false;
-                mnfactor[j] = i;
+                if (prime[j]) {
+                    isprime[j] = false;
+                    mnfactor[j] = i;
+                }
             }
         }
     }
