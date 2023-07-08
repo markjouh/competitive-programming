@@ -1,69 +1,58 @@
-struct Tree {
-    typedef int T;
+#include "bits/stdc++.h"
 
-    T f(T a, T b) {
-        return min(a, b);
+using namespace std;
+
+#define int int64_t
+
+int tree_sz;
+vector<int> tree;
+
+void update(int i, int v, int x = 0, int tl = 0, int tr = tree_sz) {
+  if (tl + 1 == tr) {
+    tree[x] = v;
+    return;
+  }
+  int mid = tl + (tr - tl) / 2;
+  if (i < mid) {
+    update(i, v, 2 * x + 1, tl, mid);
+  } else {
+    update(i, v, 2 * x + 2, mid, tr);
+  }
+}
+
+void build(vector<int> &a, int x = 0, int tl = 0, int tr = tree_sz) {
+  if (tl + 1 == tr) {
+    if (tl < (int)a.size()) {
+      tree[x] = a[tl];
     }
+    return;
+  }
+  int mid = tl + (tr - tl) / 2;
+  build(a, 2 * x + 1, tl, mid);
+  build(a, 2 * x + 2, mid, tr);
+  tree[x] = tree[2 * x + 1] + tree[2 * x + 2];
+}
 
-    int siz;
-    vector<T> tree;
+int query(int l, int r, int x = 0, int tl = 0, int tr = tree_sz) {
+  if (l >= tr || r <= tl) {
+    return 0;
+  }
+  if (l >= tl && r <= tr) {
+    return tree[x];
+  }
+  int mid = tl + (tr - tl) / 2;
+  return query(l, r, 2 * x + 1, tl, mid) + query(l, r, 2 * x + 2, mid, tr);
+}
 
-    void init(int n) {
-        siz = 1;
-        while (siz < n) {
-            siz *= 2;
-        }
-        tree.resize(2 * siz);
-    }
+int32_t main() {
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
 
-    void update(int i, int v, int x, int l, int r) {
-        if (l + 1 == r) {
-            tree[x] = v;
-            return;
-        }
-        int mid = l + (r - l) / 2;
-        if (i < mid) {
-            update(i, v, 2 * x + 1, l, mid);
-        } else {
-            update(i, v, 2 * x + 2, mid, r);
-        }
-        tree[x] = f(tree[2 * x + 1], tree[2 * x + 2]);
-    }
+  const int N = 1e6; // whatever size you need
 
-    void update(int i, int v) {
-        update(i, v, 0, 0, siz);
-    }
-
-    void build(vector<T> &a, int x, int l, int r) {
-        if (l + 1 == r) {
-            if (l < sz(a)) {
-                tree[x] = a[l];
-            }
-            return;
-        }
-        int mid = l + (r - l) / 2;
-        build(a, 2 * x + 1, l, mid);
-        build(a, 2 * x + 2, mid, r);
-        tree[x] = f(tree[2 * x + 1], tree[2 * x + 2]);
-    }
-
-    void build(vector<T> &a) {
-        init(sz(a));
-        build(a, 0, 0, siz);
-    }
-
-    T query(int L, int R, int x, int l, int r) {
-        if (l >= R || r <= L) {
-            return 0;
-        }
-        if (l >= L && r <= R) {
-            return tree[x];
-        }
-        int mid = l + (r - l) / 2;
-        return f(query(L, R, 2 * x + 1, l, mid), query(L, R, 2 * x + 2, mid, r));
-    }
-
-    T query(int l, int r) {
-        return query(l, r, 0, 0, siz);
-    }
-};
+  tree_sz = 1;
+  while (tree_sz * tree_sz < N) {
+    tree_sz *= 2;
+  }
+  tree.resize(2 * tree_sz);
+}
