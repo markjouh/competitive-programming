@@ -1,6 +1,6 @@
 const int MOD = 998244353;
 
-int mpow(int base, int exp) {
+int exp(int base, int exp) {
   int res = 1;
   while (exp) {
     if (exp & 1) {
@@ -12,22 +12,22 @@ int mpow(int base, int exp) {
   return res;
 }
 
-vector<int> fact, ifact;
+vector<int> fact, inv_fact;
 
-int minv(int base) {
-  return mpow(base, MOD - 2);
+int mod_inv(int base) {
+  return exp(base, MOD - 2);
 }
 
 void genfact(int n) {
   fact.resize(n + 1);
-  ifact.resize(n + 1);
-  fact[0] = fact[1] = ifact[0] = ifact[1] = 1;
+  inv_fact.resize(n + 1);
+  fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
   for (int i = 2; i <= n; i++) {
     fact[i] = (i * fact[i - 1]) % MOD;
   }
-  ifact[n] = minv(fact[n]);
+  inv_fact[n] = mod_inv(fact[n]);
   for (int i = n - 1; i >= 2; i--) {
-    ifact[i] = ((i + 1) * ifact[i + 1]) % MOD;
+    inv_fact[i] = ((i + 1) * inv_fact[i + 1]) % MOD;
   }
 }
 
@@ -35,5 +35,5 @@ int nck(int n, int k) {
   if (k < 0 || n < k) {
     return 0;
   }
-  return fact[n] * ifact[k] % MOD * ifact[n - k] % MOD;
+  return fact[n] * inv_fact[k] % MOD * inv_fact[n - k] % MOD;
 }
