@@ -1,16 +1,25 @@
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
 
-#define sz(x) ((int)(x).size())
-#define all(x) (x).begin(), (x).end()
-#define rall(x) (x).rbegin(), (x).rend()
 typedef long long ll;
 typedef pair<int, int> pii;
-typedef pair<ll, ll> pll;
-#define fi first
-#define se second
+
+#define sz(x) (int)(x).size()
+#define all(x) (x).begin(), (x).end()
+
+template<class T> bool ckmin(T &a, const T &b) { return b < a ? a = b, 1 : 0; }
+template<class T> bool ckmax(T &a, const T &b) { return b > a ? a = b, 1 : 0; }
+
+void solve() {
+}
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+  cin.tie(0)->sync_with_stdio(0);
+  cin.exceptions(cin.failbit);
+  int t = 1;
+  /* cin >> t; */
+  while (t--) {
+    solve();
+  }
+  return 0;
 }
