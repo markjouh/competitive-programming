@@ -1,25 +1,32 @@
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
+
 using namespace std;
 
-typedef long long ll;
-typedef pair<int, int> pii;
+#ifdef LOCAL
+#include "debug.h"
+#else
+#define dbg(x...)
+#endif
 
-#define sz(x) (int)(x).size()
-#define all(x) (x).begin(), (x).end()
-
-template<class T> bool ckmin(T &a, const T &b) { return b < a ? a = b, 1 : 0; }
-template<class T> bool ckmax(T &a, const T &b) { return b > a ? a = b, 1 : 0; }
+using ll = long long;
+ 
+#define sz(x) static_cast<int>(size(x))
+#define all(x) begin(x), end(x)
 
 void solve() {
 }
 
 int main() {
-  cin.tie(0)->sync_with_stdio(0);
-  cin.exceptions(cin.failbit);
-  int t = 1;
-  /* cin >> t; */
-  while (t--) {
-    solve();
-  }
-  return 0;
+    cin.tie(0)->sync_with_stdio(0);
+
+    int t = 1;
+    // cin >> t;
+    while (t--) {
+        solve();
+    }
+
+    return 0;
 }
+
+/*
+*/
