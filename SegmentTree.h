@@ -1,6 +1,6 @@
 /**
  * Author: Mark Zhou
- * Date: 2023-03-15
+ * Date: 15 August 2023
  * Description: A simple recursive point update range query segment tree.
  * Verification: https://judge.yosupo.jp/submission/155949
  * Time: O(n) to build, O(log(n)) to update and query
