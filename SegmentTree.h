@@ -1,3 +1,11 @@
+/**
+ * Author: Mark Zhou
+ * Date: 2023-03-15
+ * Description: A simple recursive point update range query segment tree.
+ * Verification: https://judge.yosupo.jp/submission/155949
+ * Time: O(n) to build, O(log(n)) to update and query
+ */
+
 template <typename T>
 struct SegmentTree {
     int tree_sz;
