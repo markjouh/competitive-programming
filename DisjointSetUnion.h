@@ -7,16 +7,16 @@
  */
 
 struct DSU {
-    vector<int> par, comp_sz;
+    vector<int> par, set_sz;
 
-    DSU(int n) : par(n, -1), comp_sz(n, 1) {}
+    DSU(int n) : par(n, -1), set_sz(n, 1) {}
 
     bool same_set(int a, int b) {
         return find(a) == find(b);
     }
 
     int size(int x) {
-        return comp_sz[find(x)];
+        return set_sz[find(x)];
     }
 
     int find(int x) {
@@ -28,10 +28,10 @@ struct DSU {
         if (a == b) {
             return;
         }
-        if (comp_sz[a] < comp_sz[b]) {
+        if (set_sz[a] < set_sz[b]) {
             swap(a, b);
         }
         par[b] = a;
-        comp_sz[a] += comp_sz[b];
+        set_sz[a] += set_sz[b];
     }
 };
