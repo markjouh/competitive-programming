@@ -23,7 +23,7 @@ vector<int> topsort(vector<vector<int>> &g) {
     vector<int> result;
     while (!q.empty()) {
         int u = q.front();
-        a.pop();
+        q.pop();
         result.push_back(u);
         for (int v : g[u]) {
             if (--in[v] == 0) {
