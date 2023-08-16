@@ -5,7 +5,7 @@ My library code for programming contests.
 
 0-indexing and half intervals $[l, r)$ are used everywhere.
 
-Implementations may not be the fastest, but they should be fast enough. My main focus is keeping everything short and easy to understand/modify/remember.
+These implementations should be fairly fast. However, my main focus is keeping everything short and easy to understand, so they're not topping library checker leaderboards or anything.
 
 The `ll` typedef as well as `sz(x)` and `all(x)` may be used.
 ```cpp
