@@ -7,7 +7,7 @@ My library code for programming contests.
 
 Implementations may not be the fastest, but they should be fast enough. My main focus is keeping everything short and easy to understand/modify/remember.
 
-The `ll` typedef as well as `sz(x)` and `all(x)` may be used. Have these lines in your template if you're planning on using any of this code:
+The `ll` typedef as well as `sz(x)` and `all(x)` may be used.
 ```cpp
 using ll = long long;
 #define sz(x) static_cast<int>(size(x))
