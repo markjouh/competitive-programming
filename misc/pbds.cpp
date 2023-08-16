@@ -18,9 +18,9 @@ struct custom_hash {
     }
 };
 
-template <typename T> using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 // find_by_order(k) - The item at index k
 // order_of_key(k) - Count items < k
+template <typename T> using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+// Use mp.find(x) != mp.end() instead of mp.count(x)
 template <typename K, typename V> using hash_table = gp_hash_table<K, V, custom_hash>;
-// Remember to use mp.find(x) != mp.end() instead of mp.count(x)
