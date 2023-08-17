@@ -1,3 +1,11 @@
+/**
+ * Author: Jay Leeds
+ * Date: N/A
+ * Description: Code to aid with debugging locally.
+ * Verification: N/A
+ * Time: N/A
+ */
+
 #ifndef DEBUG_H
 #define DEBUG_H
 
