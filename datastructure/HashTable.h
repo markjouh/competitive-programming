@@ -1,6 +1,6 @@
 /**
  * Author: Neal Wu
- * Date: 17 August 2023
+ * Date: 11 October 2018
  * Description: Much faster unordered_map using GNU pbds, paired with a hack-resistant hash function.
  * Verification: https://codeforces.com/contest/1642/submission/218073453
  * Time: O(1) update and access
