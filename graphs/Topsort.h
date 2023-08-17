@@ -8,14 +8,14 @@
  */
 
 vector<int> topsort(vector<vector<int>> &g) {
-    vector<int> in(sz(g));
-    for (int u = 0; u < sz(g); u++) {
+    vector<int> in(ssize(g));
+    for (int u = 0; u < ssize(g); u++) {
         for (int v : g[u]) {
             in[v]++;
         }
     }
     queue<int> q;
-    for (int i = 0; i < sz(g); i++) {
+    for (int i = 0; i < ssize(g); i++) {
         if (in[i] == 0) {
             q.push(i);
         }

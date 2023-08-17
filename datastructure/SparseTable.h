@@ -16,10 +16,10 @@ struct SparseTable {
         return min(a, b);
     }
 
-    SparseTable(vector<T> &a) : table(__lg(sz(a)) + 1, vector<T>(sz(a))) {
+    SparseTable(vector<T> &a) : table(__lg(ssize(a)) + 1, vector<T>(ssize(a))) {
         table[0] = a;
-        for (int i = 1; i <= __lg(sz(a)); i++) {
-            for (int j = 0; j + (1 << i) <= sz(a); j++) {
+        for (int i = 1; i <= __lg(ssize(a)); i++) {
+            for (int j = 0; j + (1 << i) <= ssize(a); j++) {
                 table[i][j] = merge(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);
             }
         }
