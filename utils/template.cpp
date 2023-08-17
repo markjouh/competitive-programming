@@ -9,8 +9,7 @@ using namespace std;
 #endif
 
 using ll = long long;
- 
-#define sz(x) static_cast<int>(size(x))
+
 #define all(x) begin(x), end(x)
 
 void solve() {
