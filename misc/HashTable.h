@@ -1,3 +1,11 @@
+/**
+ * Author: Mark Zhou
+ * Date: 17 August 2023
+ * Description: Much faster unordered_map using GNU pbds, paired with a hack-resistant hash function.
+ * Verification: https://codeforces.com/contest/1642/submission/218073453
+ * Time: O(1) update and access
+ */
+
 #include <ext/pb_ds/tree_policy.hpp>
 
 struct custom_hash {
