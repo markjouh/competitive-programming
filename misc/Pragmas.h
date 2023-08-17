@@ -4,7 +4,6 @@
  * Description: Auto-vectorization, may speed up code.
  * Change Ofast to O3 if working with floating point arithmetic.
  * Verification: https://codeforces.com/contest/1720/submission/219193438
- * Time: N/A
  */
 
 #pragma GCC optimize("Ofast,unroll-loops")
