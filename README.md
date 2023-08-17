@@ -1,13 +1,13 @@
 # cp-library
-My library code for programming contests.
+Library code for programming contests. While the focus is brevity and ease of understanding, these implementations should be fairly fast as well.
 
 ## Notes
 
 0-indexing and half intervals $[l, r)$ are used everywhere.
 
-These implementations should be fairly fast. However, my main focus is keeping everything short and easy to understand and modify, so they're not topping library checker leaderboards or anything.
+Implementations may use gcc-specific features such as `__lg`, as well as C++20 features such as `ssize(x)`.
 
-The `ll` typedef as `all(x)` may be used.
+The `ll` typedef and `all` macro defined in `template.cpp` are used throughout.
 ```cpp
 using ll = long long;
 #define all(x) begin(x), end(x)
