@@ -1,9 +1,6 @@
 /**
- * Author: Mark Zhou
- * Date: 15 August 2023
  * Description: Disjoint set union data structure.
  * Verification: https://judge.yosupo.jp/submission/155950
- * Time: O(a(n)) (near constant) queries.
  */
 
 struct DSU {

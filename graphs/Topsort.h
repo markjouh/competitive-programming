@@ -1,10 +1,7 @@
 /**
- * Author: Mark Zhou
- * Date: 15 August 2023
  * Description: Finds a topological ordering of a digraph.
  * The size of the result will be < n if (and only if) there is a cycle.
  * Verification: https://vjudge.net/solution/44887606/y02y5gOSgTP7p0SgaFgf
- * Time: O(|V| + |E|)
  */
 
 vector<int> topsort(vector<vector<int>> &g) {

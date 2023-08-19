@@ -1,3 +1,8 @@
+/**
+ * Description: Helper functions for modular arithmetic and combinatorics.
+ * Verification: https://codeforces.com/contest/1794/submission/219590239
+ */
+
 ll mod_exp(ll base, int exp) {
     ll res = 1;
     while (exp != 0) {

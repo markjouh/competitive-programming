@@ -1,9 +1,6 @@
 /**
- * Author: Jay Leeds
- * Date: Unknown
  * Description: Code to aid with debugging locally.
- * Verification: N/A
- * Time: N/A
+ * Verification: https://codeforces.com/contest/1794/submission/219590239
  */
 
 #ifndef DEBUG_H

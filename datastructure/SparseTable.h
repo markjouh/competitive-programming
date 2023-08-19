@@ -1,11 +1,8 @@
 /**
- * Author: Mark Zhou
- * Date: 17 August 2023
  * Description: Performs static range queries in O(1).
  * Merge function must be idempotent, meaning that it doesn't matter
  * if some item is considered more than once while querying.
  * Verification: https://judge.yosupo.jp/submission/156288
- * Time: O(n * log(n)) to build, O(1) to query
  */
 
 template <typename T>

@@ -1,9 +1,6 @@
 /**
- * Author: Mark Zhou
- * Date: 15 August 2023
  * Description: Supports queries for the kth largest element and for the number of elements less than k in log time.
  * Verification: https://codeforces.com/contest/1860/problem/C
- * Time: O(log(n)) insert and query
  */
 
 #include <ext/pb_ds/assoc_container.hpp>
