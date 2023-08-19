@@ -1,4 +1,4 @@
-<int> mn_factor;
+vector<int> mn_factor;
 vector<bool> prime;
 vector<int> primes;
 
