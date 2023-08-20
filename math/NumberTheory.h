@@ -1,6 +1,6 @@
 /**
  * Description: Sieve and other helper functions for number theory problems.
- * Verification: https://codeforces.com/contest/1794/submission/219590239
+ * Verification: https://codeforces.com/contest/1673/submission/219621655
  */
 
 vector<int> mn_factor;
@@ -26,4 +26,39 @@ void sieve(int n) {
             }
         }
     }
+}
+
+vector<pair<int, int>> prime_factorize(int n) {
+    vector<pair<int, int>> res;
+    for (int p : primes) {
+        if (1ll * p * p > n) {
+            break;
+        }
+        if (n % p == 0) {
+            res.push_back({p, 0});
+            do {
+                n /= p;
+                res.back().second++;
+            } while (n % p == 0);
+        }
+    }
+    if (n > 1) {
+        res.push_back({n, 1});
+    }
+    return res;
+}
+
+vector<int> get_factors(int n) {
+    vector<int> res = {1};
+    for (auto [p, exp] : prime_factorize(n)) {
+        const int prev_sz = ssize(res);
+        int mul = 1;
+        for (int i = 0; i < exp; i++) {
+            mul *= p;
+            for (int j = 0; j < prev_sz; j++) {
+                res.push_back(res[j] * mul);
+            }
+        }
+    }
+    return res;
 }
