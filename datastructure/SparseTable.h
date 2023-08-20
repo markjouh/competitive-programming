@@ -8,18 +8,22 @@
 template <typename T>
 struct SparseTable {
     vector<vector<T>> table;
- 
+
+    T merge(T a, T b) {
+        return min(a, b);
+    }
+
     SparseTable(vector<T> &a) : table(__lg(ssize(a)) + 1, vector<T>(ssize(a))) {
         table[0] = a;
         for (int i = 1; i <= __lg(ssize(a)); i++) {
             for (int j = 0; j + (1 << i) <= ssize(a); j++) {
-                table[i][j] = min(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);
+                table[i][j] = merge(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);
             }
         }
     }
- 
+
     T query(int l, int r) {
         int i = __lg(r - l);
-        return min(table[i][l], table[i][r - (1 << i)]);
+        return merge(table[i][l], table[i][r - (1 << i)]);
     }
 };
