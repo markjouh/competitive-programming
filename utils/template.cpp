@@ -10,7 +10,7 @@ using namespace std;
 
 using ll = long long;
 
-#define all(x) begin(x), end(x) 
+#define all(x) begin(x), end(x)
 
 void solve() {
 }
