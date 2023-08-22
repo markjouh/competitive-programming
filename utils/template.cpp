@@ -5,7 +5,7 @@ using namespace std;
 #ifdef LOCAL
 #include "debug.h"
 #else
-#define dbg(x...)
+#define DEBUG(x...)
 #endif
 
 using ll = long long;

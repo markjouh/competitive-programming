@@ -34,6 +34,6 @@ void _print() { std::cerr << "]\n"; }
 template <typename T, typename... V>
 void _print(T t, V... v) { __print(t); if (sizeof...(v)) std::cerr << ", "; _print(v...); }
 
-#define dbg(x...) std::cerr << "\e[91m" << __func__ << ":" << __LINE__ << " [" << #x << "] = ["; _print(x); std::cerr << "\e[39m" << std::endl;
+#define DEBUG(x...) std::cerr << "\e[91m" << __func__ << ":" << __LINE__ << " [" << #x << "] = ["; _print(x); std::cerr << "\e[39m" << std::endl;
 
 #endif // DEBUG_H
