@@ -5,14 +5,15 @@
  */
 
 vector<int> topsort(vector<vector<int>> &g) {
-    vector<int> in(ssize(g));
-    for (int u = 0; u < ssize(g); u++) {
+    const int n = size(g);
+    vector<int> in(n);
+    for (int u = 0; u < n; u++) {
         for (int v : g[u]) {
             in[v]++;
         }
     }
     queue<int> q;
-    for (int i = 0; i < ssize(g); i++) {
+    for (int i = 0; i < n; i++) {
         if (in[i] == 0) {
             q.push(i);
         }

@@ -3,8 +3,8 @@
  * Verification: https://codeforces.com/contest/1794/submission/219590239
  */
 
-ll mod_exp(ll base, int exp) {
-    ll res = 1;
+long long mod_exp(long long base, int exp) {
+    long long res = 1;
     while (exp != 0) {
         if (exp & 1) {
             res = res * base % MOD;
@@ -15,11 +15,11 @@ ll mod_exp(ll base, int exp) {
     return res;
 }
 
-ll mod_inv(int x) {
+long long mod_inv(int x) {
     return mod_exp(x, MOD - 2);
 }
 
-vector<ll> fact, inv_fact;
+vector<long long> fact, inv_fact;
 
 void gen_factorial(int n) {
     fact.resize(n + 1);
@@ -36,7 +36,7 @@ void gen_factorial(int n) {
     }
 }
 
-ll choose(int n, int k) {
+long long choose(int n, int k) {
     if (k < 0 || k > n) {
         return 0;
     }

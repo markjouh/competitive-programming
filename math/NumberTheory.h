@@ -18,7 +18,7 @@ void sieve(int n) {
             mn_factor[p] = p;
             primes.push_back(p);
 
-            for (ll i = 1ll * p * p; i <= n; i += p) {
+            for (long long i = 1ll * p * p; i <= n; i += p) {
                 if (prime[i]) {
                     prime[i] = false;
                     mn_factor[i] = p;
@@ -51,7 +51,7 @@ vector<pair<int, int>> prime_factorize(int n) {
 vector<int> get_factors(int n) {
     vector<int> res = {1};
     for (auto [p, exp] : prime_factorize(n)) {
-        const int prev_sz = ssize(res);
+        const int prev_sz = size(res);
         int mul = 1;
         for (int i = 0; i < exp; i++) {
             mul *= p;
