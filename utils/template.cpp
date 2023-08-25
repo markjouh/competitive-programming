@@ -10,7 +10,12 @@ using namespace std;
 
 using ll = long long;
 
+#define sz(x) static_cast<int>(size(x))
 #define all(x) begin(x), end(x)
+
+constexpr int MOD = 1e9 + 7;
+
+template <typename T> constexpr T inf = numeric_limits<T = int>::max() / 2;
 
 void solve() {
 }
