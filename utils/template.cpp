@@ -9,13 +9,11 @@ using namespace std;
 #endif
 
 using ll = long long;
+const int MOD = 1e9 + 7;
+const int INF = 1e9; const ll BIG = 1e18;
 
 #define sz(x) static_cast<int>(size(x))
 #define all(x) begin(x), end(x)
-
-constexpr int MOD = 1e9 + 7;
-
-template <typename T> constexpr T inf = numeric_limits<T = int>::max() / 2;
 
 void solve() {
 }
