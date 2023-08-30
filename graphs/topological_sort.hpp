@@ -5,7 +5,8 @@
  */
 
 vector<int> topsort(vector<vector<int>> &g) {
-    const int n = size(g);
+    const int n = int(size(g));
+
     vector<int> in(n);
     for (int u = 0; u < n; u++) {
         for (int v : g[u]) {
@@ -18,6 +19,7 @@ vector<int> topsort(vector<vector<int>> &g) {
             q.push(i);
         }
     }
+
     vector<int> result;
     while (!q.empty()) {
         int u = q.front();
