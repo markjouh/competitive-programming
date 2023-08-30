@@ -2,7 +2,11 @@
 
 using namespace std;
 
-using ll = long long;
+#ifdef LOCAL
+#include "debug.hpp"
+#else
+#define DEBUG(x...)
+#endif
 
 int main() {
     ios::sync_with_stdio(false);
