@@ -5,7 +5,7 @@
  */
 
 vector<int> topsort(vector<vector<int>> &g) {
-    const int n = g.size();
+    const int n = size(g);
     
     vector<int> in(n);
     for (int u = 0; u < n; u++) {
