@@ -5,19 +5,22 @@
  */
 
 vector<int> topsort(vector<vector<int>> &g) {
-    const int n = size(g);
+    const int n = g.size();
+    
     vector<int> in(n);
     for (int u = 0; u < n; u++) {
         for (int v : g[u]) {
             in[v]++;
         }
     }
+
     queue<int> q;
     for (int i = 0; i < n; i++) {
         if (in[i] == 0) {
             q.push(i);
         }
     }
+
     vector<int> result;
     while (!q.empty()) {
         int u = q.front();
