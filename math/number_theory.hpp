@@ -51,7 +51,7 @@ vector<pair<int, int>> prime_factorize(int n) {
 vector<int> get_factors(int n) {
     vector<int> res = {1};
     for (auto [p, exp] : prime_factorize(n)) {
-        const int prev_sz = size(res);
+        const int prev_sz = res.size();
         int mul = 1;
         for (int i = 0; i < exp; i++) {
             mul *= p;
