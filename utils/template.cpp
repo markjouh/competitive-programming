@@ -2,23 +2,15 @@
 
 using namespace std;
 
-using ll = long long;
-
-#define all(x) begin(x), end(x)
-#define sz(x) static_cast<int>(size(x))
-
-void solve() {
-}
+#ifdef LOCAL
+#include "debug.hpp"
+#else
+#define DEBUG(x...)
+#endif
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
-    cin.exceptions(cin.failbit);
-
-    int t = 1;
-    // cin >> t;
-    while (t--) {
-        solve();
-    }
-
-    return 0;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 }
+
+// github.com/markjouh/cp-library
