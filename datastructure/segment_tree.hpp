@@ -19,7 +19,7 @@ struct SegmentTree {
     }
 
     SegmentTree(vector<T> &a) {
-        init(int(a.size()));
+        init(size(a));
         build(a, 0, 0, tree_sz);
     }
 
@@ -33,7 +33,7 @@ struct SegmentTree {
     
     void build(vector<T> &a, int x, int tl, int tr) {
         if (tl + 1 == tr) {
-            if (tl < int(a.size())) {
+            if (tl < size(a)) {
                 tree[x] = a[tl];
             }
             return;
