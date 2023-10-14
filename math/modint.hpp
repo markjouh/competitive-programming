@@ -1,15 +1,14 @@
 /**
  * Description: Class for modular arithmetic.
- * Verification: https://codeforces.com/contest/1725/submission/220440368
+ * Verification: https://kilonova.ro/pastes/B2Qj1f
  */
 
-struct Mint {
-    static constexpr int MOD = 998244353;
+constexpr int MOD = 1e9 + 7; // 998244353
 
+struct Mint {
     int v;
 
     Mint() : v(0) {}
-
     Mint(long long _v) {
         v = (-MOD < _v && _v < MOD ? _v : _v % MOD);
         if (v < 0) {
