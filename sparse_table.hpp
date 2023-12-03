@@ -1,15 +1,8 @@
-/**
- * Description: Performs static range queries in O(1).
- * Merge function must be idempotent, meaning that it doesn't matter
- * if some item is considered more than once while querying.
- * Verification: https://judge.yosupo.jp/submission/156288
- */
-
 template <typename T>
 struct SparseTable {
     vector<vector<T>> table;
 
-    T merge(T a, T b) {
+    T merge(T a, T b) { // idempotent fn
         return min(a, b);
     }
 
