@@ -1,8 +1,3 @@
-/**
- * Description: Sieve and other helper functions for number theory problems.
- * Verification: https://codeforces.com/contest/1673/submission/219621655
- */
-
 vector<int> mn_factor;
 vector<bool> prime;
 vector<int> primes;
