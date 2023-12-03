@@ -13,7 +13,7 @@ void sieve(int n) {
             mn_factor[p] = p;
             primes.push_back(p);
 
-            for (long long i = 1ll * p * p; i <= n; i += p) {
+            for (int64_t i = 1ll * p * p; i <= n; i += p) {
                 if (prime[i]) {
                     prime[i] = false;
                     mn_factor[i] = p;
