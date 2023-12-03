@@ -1,8 +1,3 @@
-/**
- * Description: Indexed set and much faster hash table, both using GNU pbds.
- * Verification: N/A
- */
-
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 
