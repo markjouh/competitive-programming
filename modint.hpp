@@ -1,8 +1,3 @@
-/**
- * Description: Class for modular arithmetic.
- * Verification: https://kilonova.ro/pastes/B2Qj1f
- */
-
 constexpr int MOD = 1e9 + 7; // 998244353
 
 struct Mint {
