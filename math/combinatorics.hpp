@@ -1,8 +1,3 @@
-/**
- * Description: Helper functions for combinatorics problems. Uses ModInt.
- * Verification: https://codeforces.com/contest/1725/submission/220440368
- */
-
 vector<Mint> fact, inv_fact;
 
 void gen_factorial(int n) {
