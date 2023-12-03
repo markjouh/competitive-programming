@@ -1,8 +1,3 @@
-/**
- * Description: Disjoint set union data structure.
- * Verification: https://judge.yosupo.jp/submission/155950
- */
-
 struct DSU {
     vector<int> par, set_sz;
 
