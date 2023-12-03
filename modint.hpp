@@ -4,7 +4,7 @@ struct Mint {
     int v;
 
     Mint() : v(0) {}
-    Mint(long long _v) {
+    Mint(int64_t _v) {
         v = (-MOD < _v && _v < MOD ? _v : _v % MOD);
         if (v < 0) {
             v += MOD;
