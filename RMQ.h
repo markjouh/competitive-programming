@@ -6,10 +6,10 @@ struct RMQ {
         return min(a, b);
     }
 
-    RMQ(vector<T> &a) : table(__lg(size(a)) + 1, vector<T>(size(a))) {
+    RMQ(vector<T> &a) : table(__lg(a.size()) + 1, vector<T>(a.size())) {
         table[0] = a;
-        for (int i = 1; i <= __lg(size(a)); i++) {
-            for (int j = 0; j + (1 << i) <= int(size(a)); j++) {
+        for (int i = 1; i <= __lg(a.size()); i++) {
+            for (int j = 0; j + (1 << i) <= a.size(); j++) {
                 table[i][j] = merge(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);
             }
         }
