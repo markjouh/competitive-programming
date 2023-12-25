@@ -5,7 +5,7 @@ const long long B = uniform_int_distribution<long long>(1e3, MOD - 1e3)(rng);
 
 vector<long long> pow_b = {1};
 
-template <typename T>
+template<typename T>
 struct Hash {
     T s;
     vector<long long> h;
