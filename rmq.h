@@ -1,12 +1,12 @@
 template <typename T>
-struct SparseTable {
+struct RMQ {
     vector<vector<T>> table;
 
     T merge(T a, T b) { // idempotent fn
         return min(a, b);
     }
 
-    SparseTable(vector<T> &a) : table(__lg(size(a)) + 1, vector<T>(size(a))) {
+    RMQ(vector<T> &a) : table(__lg(size(a)) + 1, vector<T>(size(a))) {
         table[0] = a;
         for (int i = 1; i <= __lg(size(a)); i++) {
             for (int j = 0; j + (1 << i) <= int(size(a)); j++) {
