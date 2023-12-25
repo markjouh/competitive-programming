@@ -1,4 +1,4 @@
-template <typename T>
+template<typename T>
 struct RMQ {
     vector<vector<T>> table;
 
