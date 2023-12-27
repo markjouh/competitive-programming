@@ -38,8 +38,8 @@ namespace modular {
     void gen_factorial(int n) {
         fact.resize(n + 1);
         inv_fact.resize(n + 1);
-
         fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
+        
         for (int i = 2; i <= n; i++) {
             fact[i] = mmul(fact[i - 1], i);
         }
