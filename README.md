@@ -1,4 +1,4 @@
-# cp-library v2
+# cp-library
 This repository contains my library of reference code for programming contests.
 
 ## Notes
