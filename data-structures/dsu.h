@@ -1,30 +1,23 @@
 struct DSU {
-    vector<int> par, set_sz;
+    vector<int> a;
 
-    DSU(int n) : par(n, -1), set_sz(n, 1) {}
-
-    bool same_set(int a, int b) {
-        return find(a) == find(b);
-    }
-
-    int size(int x) {
-        return set_sz[find(x)];
-    }
+    DSU(int n) : a(n, -1) {}
 
     int find(int x) {
-        return par[x] == -1 ? x : par[x] = find(par[x]);
+        return a[x] < 0 ? x : a[x] = find(a[x]);
     }
 
-    void unite(int a, int b) {
-        a = find(a);
-        b = find(b);
-        if (a == b) {
-            return;
+    bool unite(int x, int y) {
+        x = find(x);
+        y = find(y);
+        if (x == y) {
+            return 0;
         }
-        if (set_sz[a] < set_sz[b]) {
-            swap(a, b);
+        if (a[x] > a[y]) {
+            swap(x, y);
         }
-        par[b] = a;
-        set_sz[a] += set_sz[b];
+        a[x] += a[y];
+        a[y] = x;
+        return 1;
     }
 };
