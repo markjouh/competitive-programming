@@ -1,36 +1,82 @@
-template <typename T>
-struct SegmentTree {
+template<typename T>
+struct segtree {
     int n;
-    const T id = 0;
     vector<T> st;
+
+    const T id = 0;
 
     T merge(T a, T b) {
         return a + b;
     }
 
-    SegmentTree(int _n) : n(_n), st(2 * n, id) {}
+    void modify(T &a, T b) {
+        a += b;
+    }
 
-    SegmentTree(vector<T> &a) : n(a.size()), st(2 * n) {
-        for (int i = 0; i < n; i++) {
-            st[n + i] = a[i];
+    void init(int _n) {
+        n = 1;
+        while (n < _n) {
+            n *= 2;
         }
-        for (int i = n - 1; i > 0; i--) {
-            st[i] = merge(st[i << 1], st[i << 1 | 1]);
+        st.resize(2 * n, id);
+    }
+
+    segtree(int _n) {
+        init(_n);
+    }
+
+    void build(vector<T> &a, int x, int tl, int tr) {
+        if (tl + 1 == tr) {
+            if (tl < int(a.size())) {
+                st[x] = a[tl];
+            }
+            return;
         }
+        int mid = (tl + tr) / 2;
+        build(a, 2 * x + 1, tl, mid);
+        build(a, 2 * x + 2, mid, tr);
+        st[x] = merge(st[2 * x + 1], st[2 * x + 2]);
+    }
+
+    segtree(vector<T> &a) {
+        init(a.size());
+        build(a, 0, 0, n);
+    }
+
+    T query(int l, int r, int x, int tl, int tr) {
+        if (tl >= r || tr <= l) {
+            return id;
+        }
+        if (tl >= l && tr <= r) {
+            return st[x];
+        }
+        int mid = (tl + tr) / 2;
+        return merge(query(l, r, 2 * x + 1, tl, mid), query(l, r, 2 * x + 2, mid, tr));
     }
 
     T query(int l, int r) {
-        T ls = id, rs = id;
-        for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
-            if (l & 1) ls = merge(ls, st[l++]);
-            if (r & 1) rs = merge(st[--r], rs);
-        }
-        return merge(ls, rs);
+        return query(l, r, 0, 0, n);
     }
 
-    void update(int p, T v) {
-        for (st[p += n] += v, p >>= 1; p > 0; p >>= 1) {
-            st[p] = merge(st[p << 1], st[p << 1 | 1]);
+    T query(int i) {
+        return query(i, i + 1, 0, 0, n);
+    }
+
+    void update(int i, T v, int x, int tl, int tr) {
+        if (tl + 1 == tr) {
+            modify(st[x], v);
+            return;
         }
+        int mid = (tl + tr) / 2;
+        if (i < mid) {
+            update(i, v, 2 * x + 1, tl, mid);
+        } else {
+            update(i, v, 2 * x + 2, mid, tr);
+        }
+        st[x] = merge(st[2 * x + 1], st[2 * x + 2]);
+    }
+
+    void update(int i, T v) {
+        update(i, v, 0, 0, n);
     }
 };
