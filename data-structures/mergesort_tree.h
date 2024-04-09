@@ -1,8 +1,9 @@
-struct mergetree {
+template<typename T>
+struct mergesort_tree {
     int n;
-    vector<ordered_set<int>> tree;
+    vector<ordered_set<T>> tree;
 
-    mergetree(int _n) {
+    mergesort_tree(int _n) {
         n = 1;
         while (n < _n) {
             n *= 2;
@@ -10,7 +11,7 @@ struct mergetree {
         tree.resize(2 * n);
     }
 
-    void update(int p, int v, int x, int tl, int tr) {
+    void update(int p, T v, int x, int tl, int tr) {
         tree[x].insert(v);
 
         if (tl + 1 == tr) {
@@ -25,11 +26,11 @@ struct mergetree {
         }
     }
 
-    void update(int p, int v) {
+    void update(int p, T v) {
         update(p, v, 0, 0, n);
     }
 
-    int query(int l, int r, int v, int x, int tl, int tr) {
+    int query(int l, int r, T v, int x, int tl, int tr) {
         if (tl >= r || tr <= l) {
             return 0;
         }
