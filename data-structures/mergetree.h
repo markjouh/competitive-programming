@@ -1,13 +1,13 @@
-struct mergesort_tree {
-    int tree_sz;
+struct mergetree {
+    int n;
     vector<ordered_set<int>> tree;
 
-    mergesort_tree(int n) {
-        tree_sz = 1;
-        while (tree_sz < n) {
-            tree_sz *= 2;
+    mergetree(int _n) {
+        n = 1;
+        while (n < _n) {
+            n *= 2;
         }
-        tree.resize(2 * tree_sz);
+        tree.resize(2 * n);
     }
 
     void update(int p, int v, int x, int tl, int tr) {
@@ -26,7 +26,7 @@ struct mergesort_tree {
     }
 
     void update(int p, int v) {
-        update(p, v, 0, 0, tree_sz);
+        update(p, v, 0, 0, n);
     }
 
     int query(int l, int r, int v, int x, int tl, int tr) {
@@ -41,6 +41,6 @@ struct mergesort_tree {
     }
 
     int query(int l, int r, int v) {
-        return query(l, r, v, 0, 0, tree_sz);
+        return query(l, r, v, 0, 0, n);
     }
 };
