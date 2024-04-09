@@ -6,11 +6,11 @@ const long long B = uniform_int_distribution<long long>(1e3, MOD - 1e3)(rng);
 vector<long long> pow_b = {1};
 
 template<typename T>
-struct Hash {
+struct string_hash {
     T s;
     vector<long long> h;
 
-    Hash(T _s) : s(_s) {
+    string_hash(T _s) : s(_s) {
         h.resize(sz(s) + 1);
         for (int i = 0; i < sz(s); i++) {
             h[i + 1] = (__int128_t(h[i]) * B + s[i]) % MOD;
