@@ -1,5 +1,6 @@
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 
+// https://rng-58.blogspot.com/2017/02/hashing-and-probability-of-collision.html
 const long long MOD = (1ll << 61) - 1;
 const long long B = uniform_int_distribution<long long>(1e3, MOD - 1e3)(rng);
 
