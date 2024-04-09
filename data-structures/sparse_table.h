@@ -1,11 +1,11 @@
 template<typename T>
-struct RMQ {
+struct sparse_table {
     vector<vector<T>> table;
 
-    RMQ(vector<T> &a) : table(__lg(a.size()) + 1, vector<T>(a.size())) {
+    sparse_table(vector<T> &a) : table(__lg(sz(a)) + 1, vector<T>(sz(a))) {
         table[0] = a;
-        for (int i = 1; i <= __lg(a.size()); i++) {
-            for (int j = 0; j + (1 << i) <= a.size(); j++) {
+        for (int i = 1; i <= __lg(sz(a)); i++) {
+            for (int j = 0; j + (1 << i) <= sz(a); j++) {
                 table[i][j] = min(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);
             }
         }
