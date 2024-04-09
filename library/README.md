@@ -1,6 +1,4 @@
-# cp-library
-
-This repository contains my library code for programming contests.
+# Library
 
 Rather than a polished collection of code meant to be used as-is, this is more of a general collection of ideas and snippets to modify and utilize.
 
