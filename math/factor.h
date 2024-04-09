@@ -1,4 +1,4 @@
-namespace num_theory {
+namespace factor {
     vector<int> mn_factor, primes;
  
     void sieve(int n) {
