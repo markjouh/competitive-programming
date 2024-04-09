@@ -1,12 +1,15 @@
 # cp-library
+
 This repository contains my library code for programming contests.
 
-This is less of a polished collection of code meant to be used as-is, and more of a general collection of ideas and snippets to modify and use.
+Rather than a polished collection of code meant to be used as-is, this is more of a general collection of ideas and snippets to modify and utilize.
 
-Unless labeled otherwise, everything is written by me and is public domain.
+Unless otherwise labeled, everything is written by me and falls under the public domain.
 
 ## Notes
 
 - Indexing is 0-based
+
 - Intervals are half-open, like this $[l, r)$
-- GCC and C++17 may be required for everything to work
+
+- GCC and C++17 may be required for everything to function properly
