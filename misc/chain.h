@@ -1,4 +1,4 @@
-// Doubly connected linked list with the position as the data field. Used to represent a grouping and ordering of a permutation.
+// Doubly linked list with the position as the data field. Used to represent a grouping and ordering of a permutation.
 // Incomplete, will probably add more helper functions as I need them
 
 struct chain {
