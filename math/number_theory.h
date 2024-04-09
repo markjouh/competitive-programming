@@ -1,15 +1,16 @@
-namespace factor {
-    vector<int> mn_factor, primes;
+namespace NT {
+    const int MX = 1e5;
+
+    int mn_factor[MX + 1];
+    vector<int> primes;
  
-    void sieve(int n) {
-        mn_factor.resize(n + 1);
- 
-        for (int i = 2; i <= n; i++) {
+    void sieve() {
+        for (int i = 2; i <= MX; i++) {
             if (!mn_factor[i]) {
                 mn_factor[i] = i;
                 primes.push_back(i);
  
-                for (long long j = 1LL * i * i; j <= n; j += i) {
+                for (long long j = 1LL * i * i; j <= MX; j += i) {
                     if (!mn_factor[j]) {
                         mn_factor[j] = i;
                     }
@@ -22,7 +23,7 @@ namespace factor {
     vector<pair<T, int>> factorize(T x) {
         vector<pair<T, int>> res;
  
-        if (x <= int(mn_factor.size()) - 1) {
+        if (x <= MX) {
             while (x > 1) {
                 int fac = mn_factor[x];
                 int exp = 0;
