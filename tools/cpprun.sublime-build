@@ -1,0 +1,3 @@
+{
+    "shell_cmd": "g++-13 -DLOCAL -std=c++17 -O2 -Wall -I/Users/mzh/Documents/comp/compile '${file}' && echo 'cd \"${file_path}/\"' > '/tmp/${file_base_name}' && echo './a.out' >> '/tmp/${file_base_name}' && echo read >> '/tmp/${file_base_name}' && chmod +x '/tmp/${file_base_name}' && open -a Terminal.app '/tmp/${file_base_name}'"
+}
