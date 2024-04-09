@@ -1,4 +1,4 @@
-namespace NT {
+namespace number_theory {
     const int MX = 1e5;
 
     int mn_factor[MX + 1];
