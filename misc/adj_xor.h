@@ -1,3 +1,5 @@
+// Add/delete elements, query for min pairwise XOR in set.
+
 struct adj_xor {
     multiset<pair<int, int>> vals;
     map<int, int> xors;
