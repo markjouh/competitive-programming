@@ -1,5 +1,5 @@
 # cp-library
-This repository contains my library of reference code for programming contests.
+This repository contains my library code for programming contests.
 
 ## Notes
 
