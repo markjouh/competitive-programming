@@ -1,3 +1,6 @@
+// https://judge.yosupo.jp/submission/200809
+// https://judge.yosupo.jp/submission/200810
+
 namespace fast_io {
     constexpr int BUF_SZ = 1 << 19;
     constexpr int B = 10000;
