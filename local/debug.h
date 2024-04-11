@@ -1,12 +1,24 @@
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <array>
+#include <cassert>
+#include <chrono>
+#include <iomanip>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <vector>
+#include <ext/pb_ds/assoc_container.hpp>
 
 using namespace std;
+using namespace __gnu_pbds;
 
 // +-------------------------------+
-// | Constants                     |
+// | CONSTANTS                     |
 // +-------------------------------+
 
-// https://stackoverflow.com/a/75985833
 const string black_bold = "\033[30;1m";
 const string magenta_bold = "\033[35;1m";
 const string yellow = "\033[33m";
@@ -14,7 +26,7 @@ const string green = "\033[32;1m";
 const string reset = "\033[0m";
 
 // +-------------------------------+
-// | Core types (never expanded)   |
+// | CORE TYPES                    |
 // +-------------------------------+
 
 string format(const string &s) {
@@ -27,7 +39,7 @@ string format(const T &x) {
 }
 
 // +-------------------------------+
-// | All overloads                 |
+// | ALL OVERLOADS                 |
 // +-------------------------------+
 
 template<typename T>
@@ -54,8 +66,14 @@ string format(const pair<T, U> &p);
 template<typename K, typename V>
 string format(const map<K, V> &mp);
 
+template<typename K, typename V, typename H>
+string format(const gp_hash_table<K, V, H> &mp);
+
 template<typename T>
 string format(const set<T> &s);
+
+template<typename T>
+string format(const tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update> &s);
 
 template<typename T>
 string format(const stack<T> &s);
@@ -67,7 +85,7 @@ template<typename T, typename U, typename V>
 string format(const priority_queue<T, U, V> &pq);
 
 // +-------------------------------+
-// | Array types                   |
+// | ARRAYS                        |
 // +-------------------------------+
 
 template<typename T>
@@ -81,7 +99,7 @@ string format(const vector<T> &a) {
         res += format(x);
         first = false;
     }
-    return yellow + res + reset;
+    return res;
 }
 
 template<typename T>
@@ -104,7 +122,7 @@ string format(const vector<vector<T>> &a) {
     for (auto &x : aligned) {
         res += '\n' + format(x);
     }
-    return yellow + res + reset;
+    return res;
 }
 
 template<typename T>
@@ -156,12 +174,12 @@ string format(const array<array<array<T, K>, M>, N> &a) {
 }
 
 // +-------------------------------+
-// | Other STL containers          |
+// | OTHER STL CONTAINERS          |
 // +-------------------------------+
 
 template<typename T, typename U>
 string format(const pair<T, U> &p) {
-    return yellow + '(' + format(p.first) + ", " + format(p.second) + ')' + reset;
+    return yellow + '(' + reset + format(p.first) + ", " + format(p.second) + yellow + ')' + reset;
 }
 
 template<typename K, typename V>
@@ -173,8 +191,23 @@ string format(const map<K, V> &mp) {
     return format(pairs);
 }
 
+template<typename K, typename V, typename H>
+string format(const gp_hash_table<K, V, H> &mp) {
+    vector<pair<K, V>> pairs;
+    for (auto p : mp) {
+        pairs.push_back(p);
+    }
+    return format(pairs);
+}
+
 template<typename T>
 string format(const set<T> &s) {
+    vector<T> vec(begin(s), end(s));
+    return format(vec);
+}
+
+template<typename T>
+string format(const tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update> &s) {
     vector<T> vec(begin(s), end(s));
     return format(vec);
 }
@@ -214,7 +247,7 @@ string format(const priority_queue<T, U, V> &pq) {
 }
 
 // +-------------------------------+
-// | Debug macros/actual usage     |
+// | DEBUG MACRO                   |
 // +-------------------------------+
 
 #define debug(...) cerr << black_bold << "[LINE #" << __LINE__ << "]\n" << reset; debug_out(#__VA_ARGS__, __VA_ARGS__)
@@ -244,14 +277,14 @@ void debug_out(string names, T first, U&&... rest) {
 }
 
 // +-------------------------------+
-// | Other QOL features            |
+// | OTHER QOL FEATURES            |
 // +-------------------------------+
 
 auto t_begin = chrono::high_resolution_clock::now();
 
 void output_time() {
     auto t_end = chrono::high_resolution_clock::now();
-    cerr << setprecision(5) << fixed << '\n';
+    cerr << setprecision(3) << fixed << '\n';
     cerr << black_bold << "[Execution time: " << chrono::duration_cast<std::chrono::duration<double>>(t_end - t_begin).count() << " seconds]" << reset << endl;
 }
 
