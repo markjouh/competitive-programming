@@ -16,15 +16,15 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-// +-------------------------------+
-// | CONSTANTS                     |
-// +-------------------------------+
+/* ANSI escape codes */
 
-const string RED_BOLD = "\033[31;1m";
-const string MAGENTA_BOLD = "\033[35;1m";
-const string YELLOW = "\033[33m";
-const string GREEN = "\033[32;1m";
-const string RESET = "\033[0m";
+const string red_bold = "\033[31;1m";
+const string megenta_bold = "\033[35;1m";
+const string yellow = "\033[33m";
+const string green = "\033[32;1m";
+const string reset = "\033[0m";
+
+/* Debug options */
 
 struct option_t {
     uint8_t v;
@@ -32,39 +32,33 @@ struct option_t {
     option_t(int x) : v(x) {}
 };
 
-const option_t GRID_ON(0);
-const option_t GRID_OFF(1);
+const option_t grid_on(0);
+const option_t grid_off(1);
 
-const option_t BINARY_ON(2);
-const option_t BINARY_OFF(3);
-
-// +-------------------------------+
-// | MODES                         |
-// +-------------------------------+
+const option_t binary_on(2);
+const option_t binary_off(3);
 
 bool grid_mode = false;
 bool binary_mode = false;
 
-// +-------------------------------+
-// | CORE TYPES                    |
-// +-------------------------------+
+/* Core types */
 
 string format(const string &s) {
-    return YELLOW + s + RESET;
+    return yellow + s + reset;
 }
 
 template<typename T, typename = enable_if_t<is_integral<T>::value>>
 string format(const T& x) {
     if (binary_mode) {
-        return YELLOW + bitset<8>(x).to_string() + RESET;
+        return yellow + bitset<8>(x).to_string() + reset;
     }
 
-    return YELLOW + to_string(x) + RESET;
+    return yellow + to_string(x) + reset;
 }
 
 template<typename T, typename = enable_if_t<!is_integral<T>::value && !is_same<T, string>::value>, typename = decltype(to_string(declval<T>()))>
 string format(const T &x) {
-    return YELLOW + to_string(x) + RESET;
+    return yellow + to_string(x) + reset;
 }
 
 string format(const option_t &o) {
@@ -90,9 +84,7 @@ string format(const option_t &o) {
     }
 }
 
-// +-------------------------------+
-// | ALL OVERLOADS                 |
-// +-------------------------------+
+/* Define all overloads */
 
 template<typename T>
 string format(const vector<T> &a);
@@ -136,9 +128,7 @@ string format(const queue<T> &q);
 template<typename T, typename U, typename V>
 string format(const priority_queue<T, U, V> &pq);
 
-// +-------------------------------+
-// | ARRAYS                        |
-// +-------------------------------+
+/* Arrays and vectors */
 
 template<typename T>
 string format(const vector<T> &a) {
@@ -241,7 +231,7 @@ string format(const array<array<array<T, K>, M>, N> &a) {
     bool first = true;
     for (auto &x : a) {
         if (!first) {
-            res += '\n' + GREEN + string(25, '-') + RESET;
+            res += '\n' + green + string(25, '-') + reset;
         }
         res += format(x);
         first = false;
@@ -249,13 +239,11 @@ string format(const array<array<array<T, K>, M>, N> &a) {
     return res;
 }
 
-// +-------------------------------+
-// | OTHER STL CONTAINERS          |
-// +-------------------------------+
+/* Other STL containers */
 
 template<typename T, typename U>
 string format(const pair<T, U> &p) {
-    return YELLOW + '{' + RESET + format(p.first) + YELLOW + ", " + RESET + format(p.second) + YELLOW + '}' + RESET;
+    return yellow + '{' + reset + format(p.first) + yellow + ", " + reset + format(p.second) + yellow + '}' + reset;
 }
 
 template<typename K, typename V>
@@ -322,13 +310,11 @@ string format(const priority_queue<T, U, V> &pq) {
     return format(vec);
 }
 
-// +-------------------------------+
-// | DEBUG MACRO                   |
-// +-------------------------------+
+/* Debug macro */
 
-#define DEBUG(...) cerr << RED_BOLD << "[LINE #" << __LINE__ << "]\n" << RESET; debug(#__VA_ARGS__, __VA_ARGS__)
+#define debug(...) cerr << red_bold << "[LINE #" << __LINE__ << "]\n" << reset; debug_out(#__VA_ARGS__, __VA_ARGS__)
 
-void debug(string names) {
+void debug_out(string names) {
     assert(names.empty());
 
     grid_mode = false;
@@ -338,13 +324,13 @@ void debug(string names) {
 }
 
 template<typename T, typename... U>
-void debug(string names, T first, U&&... rest) {
+void debug_out(string names, T first, U&&... rest) {
     int name_r = names.find(',');
     if (name_r == int(string::npos)) {
         name_r = size(names);
     }
 
-    cerr << MAGENTA_BOLD << names.substr(0, name_r) << RESET << GREEN << " = " << RESET;
+    cerr << megenta_bold << names.substr(0, name_r) << reset << green << " = " << reset;
     names.erase(0, name_r + 1 + (name_r + 1 < int(size(names)) && names[name_r + 1] == ' '));
 
     cerr << format(first);
@@ -353,19 +339,17 @@ void debug(string names, T first, U&&... rest) {
         cerr << '\n';
     }
 
-    debug(names, rest...);
+    debug_out(names, rest...);
 }
 
-// +-------------------------------+
-// | OTHER QOL FEATURES            |
-// +-------------------------------+
+/* Timer */
 
 auto t_begin = chrono::high_resolution_clock::now();
 
 void output_time() {
     auto t_end = chrono::high_resolution_clock::now();
     cerr << setprecision(3) << fixed << '\n';
-    cerr << RED_BOLD << "[Execution time: " << chrono::duration_cast<std::chrono::duration<double>>(t_end - t_begin).count() << " seconds]" << RESET << endl;
+    cerr << red_bold << "[Execution time: " << chrono::duration_cast<std::chrono::duration<double>>(t_end - t_begin).count() << " seconds]" << reset << endl;
 }
 
 struct init_timer {
