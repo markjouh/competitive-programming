@@ -56,10 +56,10 @@ string format(const string &s) {
 template<typename T, typename = enable_if_t<is_integral<T>::value>>
 string format(const T& x) {
     if (binary_mode) {
-        return bitset<8>(x).to_string();
+        return YELLOW + bitset<8>(x).to_string() + RESET;
     }
 
-    return to_string(x);
+    return YELLOW + to_string(x) + RESET;
 }
 
 template<typename T, typename = enable_if_t<!is_integral<T>::value && !is_same<T, string>::value>, typename = decltype(to_string(declval<T>()))>
@@ -71,19 +71,22 @@ string format(const option_t &o) {
     switch (o.v) {
         case 0:
             grid_mode = true;
-            return "grid mode activated!";
+            return "Grid mode activated!";
             break;
         case 1:
             grid_mode = false;
-            return "grid mode deactivated.";
+            return "Grid mode deactivated.";
+            break;
         case 2:
             binary_mode = true;
-            return "binary mode activated!";
+            return "Binary mode activated!";
+            break;
         case 3:
             binary_mode = false;
-            return "binary mode deactivated.";
+            return "Binary mode deactivated.";
+            break;
         default:
-            return "flag not recognized.";
+            return "Flag not recognized.";
     }
 }
 
@@ -323,15 +326,19 @@ string format(const priority_queue<T, U, V> &pq) {
 // | DEBUG MACRO                   |
 // +-------------------------------+
 
-#define debug(...) cerr << RED_BOLD << "[LINE #" << __LINE__ << "]\n" << RESET; debug_out(#__VA_ARGS__, __VA_ARGS__)
+#define DEBUG(...) cerr << RED_BOLD << "[LINE #" << __LINE__ << "]\n" << RESET; debug(#__VA_ARGS__, __VA_ARGS__)
 
-void debug_out(string names) {
+void debug(string names) {
     assert(names.empty());
+
+    grid_mode = false;
+    binary_mode = false;
+
     cerr << endl;
 }
 
 template<typename T, typename... U>
-void debug_out(string names, T first, U&&... rest) {
+void debug(string names, T first, U&&... rest) {
     int name_r = names.find(',');
     if (name_r == int(string::npos)) {
         name_r = size(names);
@@ -346,7 +353,7 @@ void debug_out(string names, T first, U&&... rest) {
         cerr << '\n';
     }
 
-    debug_out(names, rest...);
+    debug(names, rest...);
 }
 
 // +-------------------------------+
