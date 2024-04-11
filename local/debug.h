@@ -16,7 +16,9 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-/* ANSI escape codes */
+// +-------------------------------+
+// | ANSI escape codes             |
+// +-------------------------------+
 
 const string red_bold = "\033[31;1m";
 const string megenta_bold = "\033[35;1m";
@@ -24,7 +26,9 @@ const string yellow = "\033[33m";
 const string green = "\033[32;1m";
 const string reset = "\033[0m";
 
-/* Debug options */
+// +-------------------------------+
+// | Output options                |
+// +-------------------------------+
 
 struct option_t {
     uint8_t v;
@@ -41,7 +45,9 @@ const option_t binary_off(3);
 bool grid_mode = false;
 bool binary_mode = false;
 
-/* Core types */
+// +-------------------------------+
+// | Core types                    |
+// +-------------------------------+
 
 string format(const string &s) {
     return yellow + s + reset;
@@ -84,7 +90,9 @@ string format(const option_t &o) {
     }
 }
 
-/* Define all overloads */
+// +-------------------------------+
+// | Overloads                     |
+// +-------------------------------+
 
 template<typename T>
 string format(const vector<T> &a);
@@ -128,7 +136,9 @@ string format(const queue<T> &q);
 template<typename T, typename U, typename V>
 string format(const priority_queue<T, U, V> &pq);
 
-/* Arrays and vectors */
+// +-------------------------------+
+// | Vectors and arrays            |
+// +-------------------------------+
 
 template<typename T>
 string format(const vector<T> &a) {
@@ -239,7 +249,9 @@ string format(const array<array<array<T, K>, M>, N> &a) {
     return res;
 }
 
-/* Other STL containers */
+// +-------------------------------+
+// | Other STL containers          |
+// +-------------------------------+
 
 template<typename T, typename U>
 string format(const pair<T, U> &p) {
@@ -310,7 +322,9 @@ string format(const priority_queue<T, U, V> &pq) {
     return format(vec);
 }
 
-/* Debug macro */
+// +-------------------------------+
+// | Debug macro                   |
+// +-------------------------------+
 
 #define debug(...) cerr << red_bold << "[LINE #" << __LINE__ << "]\n" << reset; debug_out(#__VA_ARGS__, __VA_ARGS__)
 
@@ -342,7 +356,9 @@ void debug_out(string names, T first, U&&... rest) {
     debug_out(names, rest...);
 }
 
-/* Timer */
+// +-------------------------------+
+// | Timer                         |
+// +-------------------------------+
 
 auto t_begin = chrono::high_resolution_clock::now();
 
