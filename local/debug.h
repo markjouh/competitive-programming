@@ -186,7 +186,7 @@ string format(const array<array<array<T, K>, M>, N> &a) {
 
 template<typename T, typename U>
 string format(const pair<T, U> &p) {
-    return yellow + '(' + reset + format(p.first) + yellow + " : " + reset + format(p.second) + yellow + ')' + reset;
+    return yellow + '[' + reset + format(p.first) + yellow + " : " + reset + format(p.second) + yellow + ']' + reset;
 }
 
 template<typename K, typename V>
