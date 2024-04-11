@@ -17,7 +17,7 @@ using namespace std;
 using namespace __gnu_pbds;
 
 // +-------------------------------+
-// | ANSI escape codes             |
+// | ansi escape codes             |
 // +-------------------------------+
 
 const string red_bold = "\033[31;1m";
@@ -27,7 +27,7 @@ const string green = "\033[32;1m";
 const string reset = "\033[0m";
 
 // +-------------------------------+
-// | Output options                |
+// | output options                |
 // +-------------------------------+
 
 struct option_t {
@@ -36,17 +36,14 @@ struct option_t {
     option_t(int x) : v(x) {}
 };
 
-const option_t grid_on(0);
-const option_t grid_off(1);
+const option_t grid_mode(0);
+const option_t binary_mode(1);
 
-const option_t binary_on(2);
-const option_t binary_off(3);
-
-bool grid_mode = false;
-bool binary_mode = false;
+bool in_grid_mode = false;
+bool in_binary_mode = false;
 
 // +-------------------------------+
-// | Core types                    |
+// | core types                    |
 // +-------------------------------+
 
 string format(const string &s) {
@@ -55,7 +52,7 @@ string format(const string &s) {
 
 template<typename T, typename = enable_if_t<is_integral<T>::value>>
 string format(const T& x) {
-    if (binary_mode) {
+    if (in_binary_mode) {
         return yellow + bitset<8>(x).to_string() + reset;
     }
 
@@ -70,28 +67,20 @@ string format(const T &x) {
 string format(const option_t &o) {
     switch (o.v) {
         case 0:
-            grid_mode = true;
-            return "Grid mode activated!";
+            in_grid_mode = true;
+            return "enabled";
             break;
         case 1:
-            grid_mode = false;
-            return "Grid mode deactivated.";
-            break;
-        case 2:
-            binary_mode = true;
-            return "Binary mode activated!";
-            break;
-        case 3:
-            binary_mode = false;
-            return "Binary mode deactivated.";
+            in_binary_mode = true;
+            return "enabled";
             break;
         default:
-            return "Flag not recognized.";
+            return "undefined option";
     }
 }
 
 // +-------------------------------+
-// | Overloads                     |
+// | overloads                     |
 // +-------------------------------+
 
 template<typename T>
@@ -156,7 +145,7 @@ string format(const vector<T> &a) {
 
 template<typename T>
 string format(const vector<vector<T>> &a) {
-    if (grid_mode) {
+    if (in_grid_mode) {
         int n = size(a), m = 0;
         for (int i = 0; i < n; i++) {
             m = max(m, int(size(a[i])));
@@ -250,7 +239,7 @@ string format(const array<array<array<T, K>, M>, N> &a) {
 }
 
 // +-------------------------------+
-// | Other STL containers          |
+// | other stl containers          |
 // +-------------------------------+
 
 template<typename T, typename U>
@@ -323,7 +312,7 @@ string format(const priority_queue<T, U, V> &pq) {
 }
 
 // +-------------------------------+
-// | Debug macro                   |
+// | debug macro                   |
 // +-------------------------------+
 
 #define debug(...) cerr << red_bold << "[LINE #" << __LINE__ << "]\n" << reset; debug_out(#__VA_ARGS__, __VA_ARGS__)
@@ -331,8 +320,8 @@ string format(const priority_queue<T, U, V> &pq) {
 void debug_out(string names) {
     assert(names.empty());
 
-    grid_mode = false;
-    binary_mode = false;
+    in_grid_mode = false;
+    in_binary_mode = false;
 
     cerr << endl;
 }
@@ -357,7 +346,7 @@ void debug_out(string names, T first, U&&... rest) {
 }
 
 // +-------------------------------+
-// | Timer                         |
+// | timer                         |
 // +-------------------------------+
 
 auto t_begin = chrono::high_resolution_clock::now();
