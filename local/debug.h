@@ -126,7 +126,7 @@ template<typename T, typename U, typename V>
 string format(const priority_queue<T, U, V> &pq);
 
 // +-------------------------------+
-// | Vectors and arrays            |
+// | vectors and arrays            |
 // +-------------------------------+
 
 template<typename T>
