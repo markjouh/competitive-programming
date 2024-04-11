@@ -58,7 +58,7 @@ string format(const T& x) {
     if (binary_mode) {
         return bitset<8>(x).to_string();
     }
-    
+
     return to_string(x);
 }
 
@@ -338,7 +338,7 @@ void debug_out(string names, T first, U&&... rest) {
     }
 
     cerr << MAGENTA_BOLD << names.substr(0, name_r) << RESET << GREEN << " = " << RESET;
-    names.erase(0, name_r + 2);
+    names.erase(0, name_r + 1 + (name_r + 1 < int(size(names)) && names[name_r + 1] == ' '));
 
     cerr << format(first);
 
