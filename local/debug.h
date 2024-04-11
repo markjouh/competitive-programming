@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <array>
+#include <bitset>
 #include <cassert>
 #include <chrono>
 #include <iomanip>
@@ -19,23 +20,71 @@ using namespace __gnu_pbds;
 // | CONSTANTS                     |
 // +-------------------------------+
 
-const string black_bold = "\033[30;1m";
-const string magenta_bold = "\033[35;1m";
-const string yellow = "\033[33m";
-const string green = "\033[32;1m";
-const string reset = "\033[0m";
+const string RED_BOLD = "\033[31;1m";
+const string MAGENTA_BOLD = "\033[35;1m";
+const string YELLOW = "\033[33m";
+const string GREEN = "\033[32;1m";
+const string RESET = "\033[0m";
+
+struct option_t {
+    uint8_t v;
+
+    option_t(int x) : v(x) {}
+};
+
+const option_t GRID_ON(0);
+const option_t GRID_OFF(1);
+
+const option_t BINARY_ON(2);
+const option_t BINARY_OFF(3);
+
+// +-------------------------------+
+// | MODES                         |
+// +-------------------------------+
+
+bool grid_mode = false;
+bool binary_mode = false;
 
 // +-------------------------------+
 // | CORE TYPES                    |
 // +-------------------------------+
 
 string format(const string &s) {
-    return yellow + s + reset;
+    return YELLOW + s + RESET;
 }
 
-template<typename T, typename = decltype(to_string(declval<T>()))>
+template<typename T, typename = enable_if_t<is_integral<T>::value>>
+string format(const T& x) {
+    if (binary_mode) {
+        return bitset<8>(x).to_string();
+    }
+    
+    return to_string(x);
+}
+
+template<typename T, typename = enable_if_t<!is_integral<T>::value && !is_same<T, string>::value>, typename = decltype(to_string(declval<T>()))>
 string format(const T &x) {
-    return yellow + to_string(x) + reset;
+    return YELLOW + to_string(x) + RESET;
+}
+
+string format(const option_t &o) {
+    switch (o.v) {
+        case 0:
+            grid_mode = true;
+            return "grid mode activated!";
+            break;
+        case 1:
+            grid_mode = false;
+            return "grid mode deactivated.";
+        case 2:
+            binary_mode = true;
+            return "binary mode activated!";
+        case 3:
+            binary_mode = false;
+            return "binary mode deactivated.";
+        default:
+            return "flag not recognized.";
+    }
 }
 
 // +-------------------------------+
@@ -94,42 +143,59 @@ string format(const vector<T> &a) {
     bool first = true;
     for (auto &x : a) {
         if (!first) {
-            res += ' ';
+            res += ", ";
         }
         res += format(x);
         first = false;
     }
-    return res;
+    return '{' + res + '}';
 }
 
 template<typename T>
 string format(const vector<vector<T>> &a) {
-    int n = size(a), m = 0;
-    for (int i = 0; i < n; i++) {
-        m = max(m, int(size(a[i])));
-    }
+    if (grid_mode) {
+        int n = size(a), m = 0;
+        for (int i = 0; i < n; i++) {
+            m = max(m, int(size(a[i])));
+        }
 
-    vector<vector<string>> aligned(n, vector<string>(m));
-    for (int i = 0; i < m; i++) {
-        int mx_width = 0;
-        for (int j = 0; j < n; j++) {
-            if (i < int(size(a[j]))) {
-                aligned[j][i] = format(a[j][i]);
-            } else {
-                aligned[j][i] = format(".");
+        vector<vector<string>> aligned(n, vector<string>(m));
+        for (int i = 0; i < m; i++) {
+            int mx_width = 0;
+            for (int j = 0; j < n; j++) {
+                if (i < int(size(a[j]))) {
+                    aligned[j][i] = format(a[j][i]);
+                }
+                mx_width = max(mx_width, int(size(aligned[j][i])));
             }
-            mx_width = max(mx_width, int(size(aligned[j][i])));
+            for (int j = 0; j < n; j++) {
+                aligned[j][i] = string(mx_width - int(size(aligned[j][i])), ' ') + aligned[j][i];
+            }
         }
-        for (int j = 0; j < n; j++) {
-            aligned[j][i] = string(mx_width - int(size(aligned[j][i])), '.') + aligned[j][i];
+
+        string res;
+        bool first = true;
+        for (auto &x : aligned) {
+            if (!first) {
+                res += ",\n";
+            }
+            res += " " + format(x);
+            first = false;
         }
+        return "{\n" + res + "\n}";
     }
+    
 
     string res;
-    for (auto &x : aligned) {
-        res += '\n' + format(x);
+    bool first = true;
+    for (auto &x : a) {
+        if (!first) {
+            res += ", ";
+        }
+        res += format(x);
+        first = false;
     }
-    return res;
+    return '{' + res + '}';
 }
 
 template<typename T>
@@ -138,7 +204,7 @@ string format(const vector<vector<vector<T>>> &a) {
     bool first = true;
     for (auto &x : a) {
         if (!first) {
-            res += '\n' + green + string(25, '-') + reset;
+            res += ", ";
         }
         res += format(x);
         first = false;
@@ -172,7 +238,7 @@ string format(const array<array<array<T, K>, M>, N> &a) {
     bool first = true;
     for (auto &x : a) {
         if (!first) {
-            res += '\n' + green + string(25, '-') + reset;
+            res += '\n' + GREEN + string(25, '-') + RESET;
         }
         res += format(x);
         first = false;
@@ -186,7 +252,7 @@ string format(const array<array<array<T, K>, M>, N> &a) {
 
 template<typename T, typename U>
 string format(const pair<T, U> &p) {
-    return yellow + '[' + reset + format(p.first) + yellow + " : " + reset + format(p.second) + yellow + ']' + reset;
+    return YELLOW + '{' + RESET + format(p.first) + YELLOW + ", " + RESET + format(p.second) + YELLOW + '}' + RESET;
 }
 
 template<typename K, typename V>
@@ -257,7 +323,7 @@ string format(const priority_queue<T, U, V> &pq) {
 // | DEBUG MACRO                   |
 // +-------------------------------+
 
-#define debug(...) cerr << black_bold << "[LINE #" << __LINE__ << "]\n" << reset; debug_out(#__VA_ARGS__, __VA_ARGS__)
+#define debug(...) cerr << RED_BOLD << "[LINE #" << __LINE__ << "]\n" << RESET; debug_out(#__VA_ARGS__, __VA_ARGS__)
 
 void debug_out(string names) {
     assert(names.empty());
@@ -271,7 +337,7 @@ void debug_out(string names, T first, U&&... rest) {
         name_r = size(names);
     }
 
-    cerr << magenta_bold << names.substr(0, name_r) << reset << green << " = " << reset;
+    cerr << MAGENTA_BOLD << names.substr(0, name_r) << RESET << GREEN << " = " << RESET;
     names.erase(0, name_r + 2);
 
     cerr << format(first);
@@ -292,7 +358,7 @@ auto t_begin = chrono::high_resolution_clock::now();
 void output_time() {
     auto t_end = chrono::high_resolution_clock::now();
     cerr << setprecision(3) << fixed << '\n';
-    cerr << black_bold << "[Execution time: " << chrono::duration_cast<std::chrono::duration<double>>(t_end - t_begin).count() << " seconds]" << reset << endl;
+    cerr << RED_BOLD << "[Execution time: " << chrono::duration_cast<std::chrono::duration<double>>(t_end - t_begin).count() << " seconds]" << RESET << endl;
 }
 
 struct init_timer {
