@@ -104,17 +104,24 @@ string format(const vector<T> &a) {
 
 template<typename T>
 string format(const vector<vector<T>> &a) {
-    const int n = size(a), m = size(a[0]);
+    int n = size(a), m = 0;
+    for (int i = 0; i < n; i++) {
+        m = max(m, int(size(a[i])));
+    }
 
     vector<vector<string>> aligned(n, vector<string>(m));
     for (int i = 0; i < m; i++) {
         int mx_width = 0;
         for (int j = 0; j < n; j++) {
-            aligned[j][i] = format(a[j][i]);
+            if (i < int(size(a[j]))) {
+                aligned[j][i] = format(a[j][i]);
+            } else {
+                aligned[j][i] = format(".");
+            }
             mx_width = max(mx_width, int(size(aligned[j][i])));
         }
         for (int j = 0; j < n; j++) {
-            aligned[j][i] = string(mx_width - int(size(aligned[j][i])), ' ') + aligned[j][i];
+            aligned[j][i] = string(mx_width - int(size(aligned[j][i])), '.') + aligned[j][i];
         }
     }
 
@@ -179,7 +186,7 @@ string format(const array<array<array<T, K>, M>, N> &a) {
 
 template<typename T, typename U>
 string format(const pair<T, U> &p) {
-    return yellow + '(' + reset + format(p.first) + ", " + format(p.second) + yellow + ')' + reset;
+    return yellow + '(' + reset + format(p.first) + yellow + " : " + reset + format(p.second) + yellow + ')' + reset;
 }
 
 template<typename K, typename V>
