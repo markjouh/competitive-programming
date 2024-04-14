@@ -13,6 +13,11 @@ typedef long long ll;
 #define all(x) begin(x), end(x)
 #define sz(x) static_cast<int>(size(x))
 
+#define pb push_back
+#define eb emplace_back
+#define f first
+#define s second
+
 template<typename T> bool ckmin(T &a, T b) { return b < a ? a = b, 1 : 0; }
 template<typename T> bool ckmax(T &a, T b) { return b > a ? a = b, 1 : 0; }
 
