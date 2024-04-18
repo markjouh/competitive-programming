@@ -1,15 +1,15 @@
 namespace combo {
-    const int MX = 1e5;
+    vector<mint> fact, inv_fact;
 
-    mint fact[MX + 1], inv_fact[MX + 1];
-
-    void gen_fact() {
+    void gen_fact(int n) {
+        fact.resize(n + 1);
+        inv_fact.resize(n + 1);
         fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
-        for (int i = 2; i <= MX; i++) {
+        for (int i = 2; i <= n; i++) {
             fact[i] = fact[i - 1] * i;
         }
-        inv_fact[MX] = 1 / fact[MX];
-        for (int i = MX - 1; i >= 2; i--) {
+        inv_fact[n] = 1 / fact[n];
+        for (int i = n - 1; i >= 2; i--) {
             inv_fact[i] = inv_fact[i + 1] * (i + 1);
         }
     }
