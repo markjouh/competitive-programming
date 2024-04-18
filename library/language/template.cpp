@@ -8,7 +8,8 @@ using namespace std;
 #define debug(...)
 #endif
 
-typedef long long ll;
+using ll = long long;
+using ld = long double;
 
 #define all(x) begin(x), end(x)
 #define sz(x) static_cast<int>(size(x))
