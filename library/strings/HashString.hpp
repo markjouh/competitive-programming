@@ -40,6 +40,6 @@ struct HashString {
     }
 
     HashPart getHash() {
-        return getHash(0, hash.size() - 1);
+        return getHash(0, int(hash.size()) - 1);
     }
 };
