@@ -1,5 +1,5 @@
 namespace combo {
-    vector<mint> fact, inv_fact;
+    vector<Z> fact, inv_fact;
 
     void gen_fact(int n) {
         fact.resize(n + 1);
@@ -14,7 +14,7 @@ namespace combo {
         }
     }
 
-    mint nck(int n, int k) {
+    Z nck(int n, int k) {
         if (n < k || k < 0) {
             return 0;
         }
