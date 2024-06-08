@@ -17,7 +17,7 @@ using namespace std;
 using namespace __gnu_pbds;
 
 // +-------------------------------+
-// | ansi escape codes             |
+// | ANSI escape codes             |
 // +-------------------------------+
 
 const string red_bold = "\033[31;1m";
@@ -27,7 +27,7 @@ const string green = "\033[32;1m";
 const string reset = "\033[0m";
 
 // +-------------------------------+
-// | output options                |
+// | Output options                |
 // +-------------------------------+
 
 struct option_t {
@@ -43,7 +43,7 @@ bool in_grid_mode = false;
 bool in_binary_mode = false;
 
 // +-------------------------------+
-// | core types                    |
+// | Core types                    |
 // +-------------------------------+
 
 string format(const string &s) {
@@ -80,7 +80,7 @@ string format(const option_t &o) {
 }
 
 // +-------------------------------+
-// | overloads                     |
+// | Overloads                     |
 // +-------------------------------+
 
 template<typename T>
@@ -126,7 +126,7 @@ template<typename T, typename U, typename V>
 string format(const priority_queue<T, U, V> &pq);
 
 // +-------------------------------+
-// | vectors and arrays            |
+// | Vectors and arrays            |
 // +-------------------------------+
 
 template<typename T>
@@ -239,7 +239,7 @@ string format(const array<array<array<T, K>, M>, N> &a) {
 }
 
 // +-------------------------------+
-// | other stl containers          |
+// | Other stl containers          |
 // +-------------------------------+
 
 template<typename T, typename U>
@@ -312,7 +312,7 @@ string format(const priority_queue<T, U, V> &pq) {
 }
 
 // +-------------------------------+
-// | debug macro                   |
+// | Debug macro                   |
 // +-------------------------------+
 
 #define debug(...) cerr << red_bold << "[LINE #" << __LINE__ << "]\n" << reset; debug_out(#__VA_ARGS__, __VA_ARGS__)
@@ -346,7 +346,7 @@ void debug_out(string names, T first, U&&... rest) {
 }
 
 // +-------------------------------+
-// | timer                         |
+// | Timer                         |
 // +-------------------------------+
 
 auto t_begin = chrono::high_resolution_clock::now();
