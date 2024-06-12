@@ -57,7 +57,7 @@ namespace number_theory {
 
     template<typename T> 
     vector<T> divisors(T x) {
-        vector<T> res;
+        vector<T> res = {1};
         for (auto [fac, exp] : factorize(x)) {
             int before = res.size();
             T mul = 1;
