@@ -61,7 +61,7 @@ struct mod_int {
         return a /= b;
     }
     
-    friend istream &operator>>(istream &is, mod_int a) {
+    friend istream &operator>>(istream &is, mod_int &a) {
         long long x;
         is >> x;
         a = mod_int(x);
