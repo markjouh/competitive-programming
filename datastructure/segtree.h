@@ -1,82 +1,33 @@
-template<typename T>
+template<class T, T(*op)(T, T), T(*id)()>
 struct segtree {
     int n;
-    vector<T> st;
+    vector<T> tree;
 
-    const T id = 0;
+    segtree(int sz) : n(sz), tree(2 * n, id()) {}
 
-    T merge(T a, T b) {
-        return a + b;
-    }
-
-    void modify(T &a, T b) {
-        a += b;
-    }
-
-    void init(int _n) {
-        n = 1;
-        while (n < _n) {
-            n *= 2;
+    segtree(const vector<T> &a) : n(a.size()), tree(2 * n) {
+        copy(a.begin(), a.end(), tree.begin() + n);
+        for (int i = n - 1; i > 0; i--) {
+            tree[i] = op(tree[i << 1], tree[i << 1 | 1]);
         }
-        st.resize(2 * n, id);
-    }
-
-    segtree(int _n) {
-        init(_n);
-    }
-
-    void build(vector<T> &a, int x, int tl, int tr) {
-        if (tl + 1 == tr) {
-            if (tl < int(a.size())) {
-                st[x] = a[tl];
-            }
-            return;
-        }
-        int mid = (tl + tr) / 2;
-        build(a, 2 * x + 1, tl, mid);
-        build(a, 2 * x + 2, mid, tr);
-        st[x] = merge(st[2 * x + 1], st[2 * x + 2]);
-    }
-
-    segtree(vector<T> &a) {
-        init(a.size());
-        build(a, 0, 0, n);
-    }
-
-    T query(int l, int r, int x, int tl, int tr) {
-        if (tl >= r || tr <= l) {
-            return id;
-        }
-        if (tl >= l && tr <= r) {
-            return st[x];
-        }
-        int mid = (tl + tr) / 2;
-        return merge(query(l, r, 2 * x + 1, tl, mid), query(l, r, 2 * x + 2, mid, tr));
     }
 
     T query(int l, int r) {
-        return query(l, r, 0, 0, n);
-    }
-
-    T query(int i) {
-        return query(i, i + 1, 0, 0, n);
-    }
-
-    void update(int i, T v, int x, int tl, int tr) {
-        if (tl + 1 == tr) {
-            modify(st[x], v);
-            return;
+        T ls = id(), rs = id();
+        for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
+            if (l & 1) {
+                ls = op(ls, tree[l++]);
+            }
+            if (r & 1) {
+                rs = op(tree[--r], rs);
+            }
         }
-        int mid = (tl + tr) / 2;
-        if (i < mid) {
-            update(i, v, 2 * x + 1, tl, mid);
-        } else {
-            update(i, v, 2 * x + 2, mid, tr);
-        }
-        st[x] = merge(st[2 * x + 1], st[2 * x + 2]);
+        return op(ls, rs);
     }
 
-    void update(int i, T v) {
-        update(i, v, 0, 0, n);
+    void set(int p, T val) {
+        for (tree[p += n] = val, p >>= 1; p > 0; p >>= 1) {
+            tree[p] = op(tree[p << 1], tree[p << 1 | 1]);
+        }
     }
 };
