@@ -14,7 +14,7 @@ namespace combo {
         }
     }
 
-    Z nck(int n, int k) {
+    mint nck(int n, int k) {
         if (n < k || k < 0) {
             return 0;
         }
