@@ -73,5 +73,5 @@ struct mod_int {
     }
 };
 
-// using Z = mod_int<int(1E9 + 7)>;
-// using Z = mod_int<998244353>;
+// using mint = mod_int<int(1E9 + 7)>;
+// using mint = mod_int<998244353>;
