@@ -1,5 +1,5 @@
 namespace combo {
-    vector<Z> fact, inv_fact;
+    vector<mint> fact, inv_fact;
 
     void gen_fact(int n) {
         fact.resize(n + 1);
