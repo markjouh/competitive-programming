@@ -1,4 +1,4 @@
-namespace number_theory {
+namespace factor {
     vector<int> mn_factor, primes;
 
     void sieve(int n) {
@@ -56,7 +56,7 @@ namespace number_theory {
     }
 
     template<typename T> 
-    vector<T> divisors(T x) {
+    vector<T> get_divisors(T x) {
         vector<T> res = {1};
         for (auto [fac, exp] : factorize(x)) {
             int before = res.size();
