@@ -1,4 +1,4 @@
-template<typename T>
+template<class T>
 struct lazy_segtree {
     int n;
     vector<T> st, lz;
@@ -14,7 +14,6 @@ struct lazy_segtree {
         a += b;
     }
 
-    // depends on both the merge and modify!
     void push(int x, int tl, int tr) {
         if (lz[x] != lz_id) {
             st[x] += (tr - tl) * lz[x];
@@ -26,17 +25,17 @@ struct lazy_segtree {
         }
     }
 
-    void init(int _n) {
+    void init(int sz) {
         n = 1;
-        while (n < _n) {
+        while (n < sz) {
             n *= 2;
         }
         st.resize(2 * n, id);
         lz.resize(2 * n, lz_id);
     }
 
-    lazy_segtree(int _n) {
-        init(_n);
+    lazy_segtree(int sz) {
+        init(sz);
     }
 
     void build(vector<T> &a, int x, int tl, int tr) {
@@ -53,7 +52,7 @@ struct lazy_segtree {
     }
 
     lazy_segtree(vector<T> &a) {
-        init(a.size());
+        init(int(a.size()));
         build(a, 0, 0, n);
     }
 
