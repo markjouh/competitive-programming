@@ -3,7 +3,7 @@ struct sparse_table {
     int n;
     vector<vector<T>> table;
 
-    sparse_table(vector<T> &a) : n(a.size()), table(__lg(n) + 1) {
+    sparse_table(vector<T> &a) : n(int(a.size())), table(__lg(n) + 1) {
         table[0] = a;
         for (int i = 1; i <= __lg(n); i++) {
             table[i].resize(n - (1 << i) + 1);
