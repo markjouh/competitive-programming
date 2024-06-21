@@ -4,56 +4,43 @@
 
 using namespace std;
 
-template<typename T>
-concept is_core = requires(T x) {
-    cerr << x;
-};
-
-template<typename T>
-concept is_iterable = ranges::range<T>;
-
-template<typename T>
-concept is_pair = requires(T x) {
-    x.first;
-    x.second;
-};
-
-template<typename T>
-concept like_queue = requires(T x, T::value_type y) {
-    x.push(y);
-    x.front();
-    x.pop();
-};
+template<class T>
+T::value_type get_front(T &x) {
+    typename T::value_type ret;
+    if constexpr (ranges::range<T>) {
+        ret = *x.begin();
+        x.erase(x.begin());
+    } else if constexpr (requires(T x) { x.front(); }) {
+        ret = x.front();
+        x.pop();
+    } else if constexpr (requires(T x) { x.top(); }) {
+        ret = x.top();
+        x.pop();
+    }
+    return ret;
+}
 
 template<typename T>
 void print(T x) {
-    if constexpr (is_core<T>) {
+    if constexpr (requires(T x) { cerr << x; }) {
         cerr << x;
-    } else if constexpr (is_pair<T>) {
+    } else if constexpr (requires(T x) { x.first, x.second; }) {
         cerr << '(';
         print(x.first);
         cerr << ", ";
         print(x.second);
         cerr << ')';
-    } else if constexpr (is_iterable<T>) {
+    } else {
         cerr << '[';
         bool flag = false;
-        for (auto y : x) {
+        while (!x.empty()) {
             if (flag) {
                 cerr << ", ";
             }
-            print(y);
+            print(get_front(x));
             flag = true;
         }
         cerr << ']';
-    } else if constexpr (like_queue<T>) {
-        vector<typename T::value_type> buffer;
-        for (auto y : x) {
-            buffer.push_back(x);
-        }
-        print(buffer);
-    } else {
-        cerr << "Unknown type";
     }
 }
 
