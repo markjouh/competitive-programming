@@ -4,43 +4,43 @@
 
 using namespace std;
 
-template<class T>
-T::value_type get_front(T &x) {
-    typename T::value_type ret;
-    if constexpr (ranges::range<T>) {
-        ret = *x.begin();
-        x.erase(x.begin());
-    } else if constexpr (requires(T x) { x.front(); }) {
-        ret = x.front();
-        x.pop();
-    } else if constexpr (requires(T x) { x.top(); }) {
-        ret = x.top();
-        x.pop();
-    }
-    return ret;
-}
+template<typename T>
+concept is_core = requires(T x) {
+    cerr << x;
+};
+
+template<typename T>
+concept is_iterable = ranges::range<T>;
+
+template<typename T>
+concept is_pair = requires(T x) {
+    x.first;
+    x.second;
+};
 
 template<typename T>
 void print(T x) {
-    if constexpr (requires(T x) { cerr << x; }) {
+    if constexpr (is_core<T>) {
         cerr << x;
-    } else if constexpr (requires(T x) { x.first, x.second; }) {
+    } else if constexpr (is_pair<T>) {
         cerr << '(';
         print(x.first);
         cerr << ", ";
         print(x.second);
         cerr << ')';
-    } else {
+    } else if constexpr (is_iterable<T>) {
         cerr << '[';
         bool flag = false;
-        while (!x.empty()) {
+        for (auto y : x) {
             if (flag) {
                 cerr << ", ";
             }
-            print(get_front(x));
+            print(y);
             flag = true;
         }
         cerr << ']';
+    } else {
+        cerr << "Unknown type";
     }
 }
 
