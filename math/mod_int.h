@@ -3,7 +3,7 @@ struct mod_int {
     int v;
  
     mod_int(long long _v = 0) {
-        v = (-MOD < _v && _v < MOD ? _v : _v % MOD);
+        v = int(-MOD < _v && _v < MOD ? _v : _v % MOD);
         if (v < 0) {
             v += MOD;
         }
@@ -36,12 +36,12 @@ struct mod_int {
     }
  
     mod_int &operator*=(mod_int b) {
-        v = 1ll * v * b.v % MOD;
+        v = int(1ll * v * b.v % MOD);
         return *this;
     }
  
     mod_int &operator/=(mod_int b) {
-        v = 1ll * v * pow(b, MOD - 2).v % MOD;
+        v = int(1ll * v * pow(b, MOD - 2).v % MOD);
         return *this;
     }
  
@@ -73,5 +73,5 @@ struct mod_int {
     }
 };
 
-// using mint = mod_int<int(1E9 + 7)>;
+// using mint = mod_int<int(1e9 + 7)>;
 // using mint = mod_int<998244353>;
